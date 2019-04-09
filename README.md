@@ -13,5 +13,5 @@ Catalina Vilsan and Cristina Llort.
 ## Analysis
 We are going to analyze the improvements that we get partitionating the text in more chunks to do the mapreduce.
 ### Speed-up
-We use the speed-up to show the improvements.
+We use the speed-up method to show the improvements.
 
