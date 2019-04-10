@@ -1,0 +1,9 @@
+ibm_cf:
+    endpoint    : CF_API_ENDPOINT
+    namespace   : CF_HOST
+    api_key     : CF_API_KEY
+
+ibm_cos:
+    endpoint   : COS_API_ENDPOINT
+    access_key : ACCESS_KEY
+    secret_key : SECRET_KEY
