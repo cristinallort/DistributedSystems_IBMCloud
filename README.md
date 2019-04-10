@@ -13,7 +13,13 @@ As it name suggests, it allows for distributed processing of the map() and reduc
 Because each mapping operation is independent of the others, all maps can be performed in parallel. The same occurs to the reducers, given that all outputs of the map operation with the same key are handed to the same reducer. 
 
 ## How to execute it?
-
+1. Create an IBM Cloud account -> then create a bucket and upload a text file.
+2. Modify ibm_cloud_config.txt -> include your credentials and change the format to yaml format.
+3. Change "cattydeposito" to your bucket name in all the files.
+4. Login to IBM Cloud in your console (Linux): ibmcloud login -a cloud.ibm.com
+5. Execute the makefile (Linux).
+6. Execute orchestrator.py:
+python3 orchestrator.py "file_name" "number_of_partitions"
 
 
 ## Architecture and implementation
@@ -31,6 +37,9 @@ To test our code we use the following texts:
 1. Sherlock Holmes  (6.5M) (English): https://norvig.com/big.txt
 2. El Quijote (2.2M) (Spanish): http://www.gutenberg.org/cache/epub/2000/pg2000.txt
 3. The Bible (4.5M) (English): http://www.gutenberg.org/cache/epub/10/pg10.txt
+
+We also use larger text files that were created by concatenating books from Project Gutenberg:
+4. http://cloudlab.urv.cat/josep/distributed_systems/
 
 ## Analysis using the speed-up
 We are going to analyze the improvements that we get partitionating the text in more chunks to do the mapreduce using the speed-up methods.
