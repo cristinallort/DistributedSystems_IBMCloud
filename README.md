@@ -15,10 +15,8 @@ Because each mapping operation is independent of the others, all maps can be per
 ## How to execute it?
 
 
-## Architecture
 
-
-## Implementation
+## Architecture and implementation
 We need to have our IBM Cloud Credentials in ibm_cloud_config.yaml and have ibm_cf_connector.py to enable the connection to the cloud.
 We need to implement the following python files:
 1. orchestrator.py -> it contains the structure of the program and does the partitionings and the invokes
