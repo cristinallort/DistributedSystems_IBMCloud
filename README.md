@@ -41,7 +41,7 @@ To test our code we use the following texts:
 3. The Bible (4.5M) (English): http://www.gutenberg.org/cache/epub/10/pg10.txt
 
 We also use larger text files that were created by concatenating books from Project Gutenberg:
-4. http://cloudlab.urv.cat/josep/distributed_systems/
+http://cloudlab.urv.cat/josep/distributed_systems/
 
 ## Analysis using the speed-up
 We are going to analyze the improvements that we get partitionating the text in more chunks to do the mapreduce using the speed-up methods.
