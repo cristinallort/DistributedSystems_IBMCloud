@@ -24,13 +24,15 @@ python3 orchestrator.py "file_name" "number_of_partitions"
 
 ## Architecture and implementation
 We need to have our IBM Cloud Credentials in ibm_cloud_config.yaml and have ibm_cf_connector.py to enable the connection to the cloud.
-We need to implement the following python files:
+We need to implement the following python files and zips:
 1. orchestrator.py -> it contains the structure of the program and does the partitionings and the invokes
-2. WordCount.py -> it contains the code that implements the mapping of the word count function
-3. CountWord.py -> it contains the code that implements the mapping of the count word function
-4. ReduceWordCount.py -> it contains the code that implements the reducing of the count word function
-5. ReduceCountword.py -> it contains the code that implements the reducing of the count word function
+2. WordCount.zip -> it contains the code that implements the mapping of the word count function
+3. CountWord.zip -> it contains the code that implements the mapping of the count word function
+4. ReduceWordCount.zip -> it contains the code that implements the reducing of the count word function
+5. ReduceCountword.zip -> it contains the code that implements the reducing of the count word function
 6. cos_backend.py -> it contains all the functions that enable working with IBM Cloud (get, pull or delete files, for example)
+
+All the zips contain the cos_backend.py.
 
 ## Validation
 To test our code we use the following texts:
