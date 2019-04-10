@@ -1,9 +1,0 @@
-ibm_cf:
-    endpoint    : https://eu-gb.functions.cloud.ibm.com
-    namespace   : catalinagabrie.vilsan@estudiants.urv.cat_dev
-    api_key     : c469c8ae-32fd-47f9-9270-584b73fdca6f:0Oi0wGOHZYbxmUU8PhYTUdJHLAeovFJZ8BM4TFUM4Opu4ZEfC8HHkE2ut0wTwiPE
-
-ibm_cos:
-    endpoint   : https://s3.eu-gb.cloud-object-storage.appdomain.cloud
-    access_key : e95931f019ab416eacdbc8fe9a447428
-    secret_key : ff5d3a0a02257b3e263b262bd0c647a3e0441c29a8adbe1d
