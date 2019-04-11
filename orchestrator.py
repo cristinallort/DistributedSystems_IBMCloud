@@ -20,7 +20,6 @@ if(len(sys.argv) == 3):
 	diccionari = {}	
 	diccionari["config"] = res['ibm_cos']
 	diccionari["num_chunks"] = num_chunks
-	diccionari["size_file"] = size_file
 
 	chunk_size = int(size_file/num_chunks)
 
@@ -32,14 +31,14 @@ if(len(sys.argv) == 3):
 			final = size_file
 		else:
 			inici = i*chunk_size
-			final = ((i+1)*chunk_size)
+			final = ((i+1)*chunk_size)-1
 		
 		rang = "bytes="+str(inici)+"-"+str(final)
-		data = str(cos.get_object('cattydeposito', file_name, rang))
+		#data = str(cos.get_object('cattydeposito', file_name, rang))
+		data = cos.get_object('cattydeposito', file_name, rang).decode('latin-1')
 		diccionari["num"]=i
 
-		data = data.lower()
-		data = re.sub('[.,;:_¿?!"·$%&/()\{}@#¬^<>]', '', data).replace('-', '').replace("\\n", " ").replace("\\r", "").replace("\\t", " ").replace("*", "").replace("'", "").replace("  "," ")
+		data = data.replace('*', '')
 		
 		diccionari["data"]=data
 		
