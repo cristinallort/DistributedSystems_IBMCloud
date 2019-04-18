@@ -3,6 +3,9 @@ import sys
 import yaml
 import cos_backend 
 import re
+import os
+from time import sleep
+from time import time
 
 with open("ibm_cloud_config.yaml", "r") as config_file: 
 	res = yaml.safe_load(config_file)
@@ -20,9 +23,13 @@ if(len(sys.argv) == 3):
 	diccionari = {}	
 	diccionari["config"] = res['ibm_cos']
 	diccionari["num_chunks"] = num_chunks
+	diccionari["file_name"] = file_name
 
 	chunk_size = int(size_file/num_chunks)
-
+	llistaRang = []
+	
+	tempsWordCount=0
+	tempsCountWord=0
 	#Creem les particions
 	for i in range(num_chunks):
 		rang = ""
@@ -34,21 +41,33 @@ if(len(sys.argv) == 3):
 			final = ((i+1)*chunk_size)-1
 		
 		rang = "bytes="+str(inici)+"-"+str(final)
-		#data = str(cos.get_object('cattydeposito', file_name, rang))
-		data = cos.get_object('cattydeposito', file_name, rang).decode('latin-1')
+		llistaRang.append(rang)
+
+		diccionari["rang"]=rang
 		diccionari["num"]=i
 
-		data = data.replace('*', '')
-		
-		diccionari["data"]=data
-		
-		#Invoquem mapwordcount i mapcountword
+		inici = time()
 		cf.invoke("WordCount", diccionari)
+		fiWordCount = time()
 		cf.invoke("CountWord", diccionari)
+		fiCountWord = time()
 
-	#Invoquem reducewordcount i reducecountword
+		tempsWordCount = tempsWordCount+fiWordCount-inici
+		tempsCountWord = tempsCountWord+fiCountWord-fiWordCount
+	
+	sleep(0.5)
+
+	inici = time()
 	cf.invoke("ReduceWordCount", diccionari)
+	fiWordCount = time()
 	cf.invoke("ReduceCountWord", diccionari)
+	fiCountWord = time()
+
+	tempsWordCount = tempsWordCount+fiWordCount-inici
+	tempsCountWord = tempsCountWord+fiCountWord-fiWordCount
+
+	print ("Temps Count Word: "+str(tempsCountWord)+"s\nTemps Word Count: "+str(tempsWordCount)+"s\n")
+
 else:
 	print("Nombre de parametres incorrecte.")
 

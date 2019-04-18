@@ -21,4 +21,4 @@ def main(args):
 	
 	cos.put_object('cattydeposito', "ReduceWordCount", json.dumps(diccionari))
 
-	return diccionari
+	return {}
