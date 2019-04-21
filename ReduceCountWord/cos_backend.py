@@ -41,3 +41,7 @@ class cos_backend:
 				
 	def delete_object(self, bucket_name, key):
 		return self.cos_client.delete_object(Bucket=bucket_name,Key=key)
+
+	
+	def list_object(self, bucket_name, prefix):
+		return self.cos_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)

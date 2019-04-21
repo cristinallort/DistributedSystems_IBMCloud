@@ -13,6 +13,11 @@ def main(args):
 	diccionari = {}
 	numero_paraules = 0
 
+	numero_fitxers = 0
+	while(numero_fitxers!=(num_chunks)):
+		diccionari_bucket=cos.list_object('cattydeposito', 'fileCountWord')
+		numero_fitxers=diccionari_bucket['KeyCount']
+
 	for i in range(num_chunk):
 		data = cos.get_object('cattydeposito', "fileCountWord"+str(i), "")
 		diccionari = json.loads(data)

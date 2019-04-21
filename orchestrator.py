@@ -4,8 +4,9 @@ import yaml
 import cos_backend 
 import re
 import os
-from time import sleep
 from time import time
+
+inici = time()
 
 with open("ibm_cloud_config.yaml", "r") as config_file: 
 	res = yaml.safe_load(config_file)
@@ -30,6 +31,7 @@ if(len(sys.argv) == 3):
 	
 	tempsWordCount=0
 	tempsCountWord=0
+	
 	#Creem les particions
 	for i in range(num_chunks):
 		rang = ""
@@ -46,7 +48,7 @@ if(len(sys.argv) == 3):
 		diccionari["rang"]=rang
 		diccionari["num"]=i
 
-		inici = time()
+		
 		cf.invoke("WordCount", diccionari)
 		fiWordCount = time()
 		cf.invoke("CountWord", diccionari)
@@ -54,11 +56,9 @@ if(len(sys.argv) == 3):
 
 		tempsWordCount = tempsWordCount+fiWordCount-inici
 		tempsCountWord = tempsCountWord+fiCountWord-fiWordCount
-	
-	sleep(0.5)
 
 	inici = time()
-	cf.invoke("ReduceWordCount", diccionari)
+	#cf.invoke("ReduceWordCount", diccionari)
 	fiWordCount = time()
 	cf.invoke("ReduceCountWord", diccionari)
 	fiCountWord = time()

@@ -19,10 +19,18 @@ def main(args):
 	data = re.sub(r'(\r)', '', data)
 	data = data.lower()
 
-	diccionari=defaultdict(int)
 	
-	for paraula in data.split():
-		diccionari[paraula]+=1
+
+	data = data.split()
+	
+
+	diccionari={}
+	for word in data:
+		if (diccionari.get(word))==None:
+			diccionari[word]=1
+		else:
+			diccionari[word]=diccionari[word]+1	
+	
 	
 	cos.put_object('cattydeposito', "fileWordCount"+str(num), json.dumps(diccionari))
 	
