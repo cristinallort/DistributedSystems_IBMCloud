@@ -28,4 +28,4 @@ def main(args):
 	
 	cos.put_object(bucket_name, "ReduceWordCount", json.dumps(diccionari))
 
-	return {}
+	return {"resultat":"OK"}

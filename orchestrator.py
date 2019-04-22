@@ -31,12 +31,10 @@ if(len(sys.argv) == 3):
 	chunk_size = int(size_file/num_chunks)
 	llistaRang = []
 	
-	tempsWordCount=0
-	tempsCountWord=0
+	inicitemps = time()
 	
 	#Creem les particions
 	for i in range(num_chunks):
-		inicitemps = time()
 		rang = ""
 		if(i == num_chunks-1):
 			inici = i*chunk_size
@@ -52,23 +50,38 @@ if(len(sys.argv) == 3):
 		diccionari["num"]=i
 
 		
+		#MAP WORD COUNT
 		cf.invoke("WordCount", diccionari)
-		fiWordCount = time()
+	
+		#MAP COUNT WORD
 		cf.invoke("CountWord", diccionari)
-		fiCountWord = time()
 
-		tempsWordCount = tempsWordCount+fiWordCount-inicitemps
-		tempsCountWord = tempsCountWord+fiCountWord-fiWordCount
+	
 
-	inicitemps = time()
+	#REDUCE WORD COUNT
+	iniciWordCount = time()
 	cf.invoke("ReduceWordCount", diccionari)
+	i = 0
+	while(i == 0):
+		dades = cos.get_object(bucket_name,"ReduceWordCount", "")
+		if(dades != "No file"):
+			i+=1
 	fiWordCount = time()
+	
+	
+	#REDUCE COUNT WORD
 	cf.invoke("ReduceCountWord", diccionari)
+	i = 0
+	while(i == 0):
+		dades = cos.get_object(bucket_name,"ReduceWordCount", "")
+		if(dades != "No file"):
+			i+=1
 	fiCountWord = time()
 
-	tempsWordCount = tempsWordCount+fiWordCount-inicitemps
-	tempsCountWord = tempsCountWord+fiCountWord-fiWordCount
-
+	
+	#TEMPS
+	tempsWordCount = fiWordCount-inicitemps
+	tempsCountWord = fiCountWord-inicitemps-(fiWordCount-iniciWordCount)
 	print ("Temps Count Word: "+str(tempsCountWord)+"s\nTemps Word Count: "+str(tempsWordCount)+"s\n")
 
 else:

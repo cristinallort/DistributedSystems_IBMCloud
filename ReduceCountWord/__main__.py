@@ -27,5 +27,5 @@ def main(args):
 		
 	cos.put_object(bucket_name, "ReduceCountWord", str(numero_paraules))
 	
-	return {}
+	return {"resultat":"OK"}
 

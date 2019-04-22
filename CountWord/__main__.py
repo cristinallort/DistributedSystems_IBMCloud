@@ -19,5 +19,5 @@ def main(args):
 	cos.put_object(bucket_name, "fileCountWord"+str(num), json.dumps(diccionari))
 	
 
-	return {}
+	return {"resultat":"OK"}
 
