@@ -15,10 +15,9 @@ Because each mapping operation is independent of the others, all maps can be per
 ## How to execute it?
 1. Create an IBM Cloud account -> then create a bucket and upload a text file.
 2. Modify ibm_cloud_config.txt -> include your credentials and change the format to yaml format.
-3. Change "cattydeposito" to your bucket name in all the files.
-4. Login to IBM Cloud in your console (Linux): ibmcloud login -a cloud.ibm.com
-5. Execute the makefile (Linux).
-6. Execute orchestrator.py:
+3. Login to IBM Cloud in your console (Linux): ibmcloud login -a cloud.ibm.com
+4. Execute the makefile (Linux).
+5. Execute orchestrator.py:
 python3 orchestrator.py "file_name" "number_of_partitions"
 
 
@@ -43,7 +42,5 @@ To test our code we use the following texts:
 We also use larger text files that were created by concatenating books from Project Gutenberg:
 http://cloudlab.urv.cat/josep/distributed_systems/
 
-## Analysis using the speed-up
-We are going to analyze the improvements that we get partitionating the text in more chunks to do the mapreduce using the speed-up methods.
 
 
