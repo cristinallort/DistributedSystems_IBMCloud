@@ -63,9 +63,8 @@ if(len(sys.argv) == 3):
 	cf.invoke("ReduceWordCount", diccionari)
 	i = 0
 	while(i == 0):
-		dades = cos.get_object(bucket_name,"ReduceWordCount", "")
-		if(dades != "No file"):
-			i+=1
+		i = cos.list_object(bucket_name, 'ReduceWordCount')
+		
 	fiWordCount = time()
 	
 	
@@ -73,9 +72,7 @@ if(len(sys.argv) == 3):
 	cf.invoke("ReduceCountWord", diccionari)
 	i = 0
 	while(i == 0):
-		dades = cos.get_object(bucket_name,"ReduceWordCount", "")
-		if(dades != "No file"):
-			i+=1
+		i = cos.list_object(bucket_name, 'ReduceCountWord')
 	fiCountWord = time()
 
 	
