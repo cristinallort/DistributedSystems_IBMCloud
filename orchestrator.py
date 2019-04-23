@@ -63,8 +63,10 @@ if(len(sys.argv) == 3):
 	cf.invoke("ReduceWordCount", diccionari)
 	i = 0
 	while(i == 0):
-		i = cos.list_object(bucket_name, 'ReduceWordCount')
-		
+		d = cos.list_object(bucket_name, 'ReduceWordCount')
+		i = d['KeyCount']
+		timeOut = time()
+		if((timeOut-iniciWordCount)>180): i=2
 	fiWordCount = time()
 	
 	
@@ -72,14 +74,21 @@ if(len(sys.argv) == 3):
 	cf.invoke("ReduceCountWord", diccionari)
 	i = 0
 	while(i == 0):
-		i = cos.list_object(bucket_name, 'ReduceCountWord')
+		d = cos.list_object(bucket_name, 'ReduceCountWord')
+		i = d['KeyCount']
+		timeOut = time()
+		if((timeOut-fiWordCount)>180): i=2
 	fiCountWord = time()
+
 
 	
 	#TEMPS
-	tempsWordCount = fiWordCount-inicitemps
-	tempsCountWord = fiCountWord-inicitemps-(fiWordCount-iniciWordCount)
-	print ("Temps Count Word: "+str(tempsCountWord)+"s\nTemps Word Count: "+str(tempsWordCount)+"s\n")
+	if(i==1):
+		tempsWordCount = fiWordCount-inicitemps
+		tempsCountWord = fiCountWord-inicitemps-(fiWordCount-iniciWordCount)
+		print ("Temps Count Word: "+str(tempsCountWord)+"s\nTemps Word Count: "+str(tempsWordCount)+"s\n")
+	else:
+		print("Time out!")
 
 else:
 	print("Nombre de parametres incorrecte.")
